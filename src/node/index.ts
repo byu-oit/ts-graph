@@ -1,13 +1,13 @@
 export default class Node<T> {
-    value: T;
-    next: Node<T> | null = null;
+    public value: T;
+    public next: Node<T> | null;
 
-    constructor(value: T, next?: Node<T> | null) {
+    constructor(value: T, next: Node<T> | null = null) {
         this.value = value;
         this.next = next;
     }
 
-    toString(callback: (value: T) => string) {
+    public toString(callback?: (value: T) => string) {
         return callback ? callback(this.value) : `${this.value}`;
     }
 }

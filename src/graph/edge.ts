@@ -1,29 +1,29 @@
 import Vertex from './vertex';
 
 export default class Edge<T> {
-    start: Vertex<T>;
-    end: Vertex<T>;
-    weight: number = 0;
+    public start: Vertex<T>;
+    public end: Vertex<T>;
+    public weight: number;
 
-    constructor(start: Vertex<T>, end: Vertex<T>, weight?: number) {
+    constructor(start: Vertex<T>, end: Vertex<T>, weight: number = 0) {
         this.start = start;
         this.end = end;
         this.weight = weight;
     }
 
-    getKey() {
+    public getKey() {
         const startKey = this.start.getKey();
         const endKey = this.end.getKey();
-        return `${startKey}_${endKey}`
+        return `${startKey}_${endKey}`;
     }
 
-    reverse() {
+    public reverse() {
         const temp = this.start;
         this.start = this.end;
         this.end = temp;
     }
 
-    toString() {
+    public toString() {
         return this.getKey();
     }
 }

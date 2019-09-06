@@ -1,12 +1,12 @@
 import * as uuid from 'uuid/v4';
-import Edge from './edge';
 import LinkedList from '../linked-list';
 import Node from '../node';
+import Edge from './edge';
 
 export default class Vertex<T> {
-    edges: LinkedList<Edge<T>>;
-    value: T;
-    key: string;
+    public edges: LinkedList<Edge<T>>;
+    public key: string;
+    public value: T;
 
     constructor(value: T, key?: string) {
         if (value === undefined) {
@@ -15,71 +15,73 @@ export default class Vertex<T> {
 
         const edgeComparator = (a: Edge<T>, b: Edge<T>) => {
             if (a.getKey() === b.getKey()) {
-                return 0
+                return 0;
             }
 
             return a.getKey() < b.getKey() ? -1 : 1;
         };
 
+        // Value and key are distinct concepts: value may be any, key must be a string.
+        // Using UUID v4 to try to keep unique keys within a collection of vertices.
         this.key = key === undefined ? uuid() : key;
-        this.value = value;
         this.edges = new LinkedList(edgeComparator);
+        this.value = value;
     }
 
-    add(edge: Edge<T>) {
+    public add(edge: Edge<T>) {
         this.edges.append(edge);
         return this;
     }
 
-    delete(edge: Edge<T>) {
-        this.edges.delete(edge)
+    public delete(edge: Edge<T>) {
+        this.edges.delete(edge);
     }
 
-    getNeighbors() {
+    public getNeighbors() {
         const edges = this.edges.toArray();
 
-        return edges.map((node: Node<Edge<T>>) => {
-            return node.value.start === this ? node.value.end : node.value.start;
-        });
+        // Return either start or end vertex.
+        // For undirected graphs it is possible that current vertex will be the end one.
+        return edges.map((node: Node<Edge<T>>) => node.value.start === this ? node.value.end : node.value.start);
     }
 
-    getEdges() {
+    public getEdges() {
         return this.edges.toArray().map(node => node.value);
     }
 
-    getDegree() {
+    public getDegree() {
         return this.edges.toArray().length;
     }
 
-    hasEdge(requireEdge) {
-        const edgeNode = this.edges.find(undefined, edge => edge === requireEdge);
+    public hasEdge(requiredEdge: Edge<T>) {
+        const edgeNode = this.edges.find(undefined, edge => edge === requiredEdge);
         return !!edgeNode;
     }
 
-    hasNeighbor(vertex: Vertex<T>) {
+    public hasNeighbor(vertex: Vertex<T>) {
         const vertexNode = this.edges.find(undefined, edge => edge.start === vertex || edge.end === vertex);
-        return !!vertex
+        return !!vertex;
     }
 
-    findEdge(vertex: Vertex<T>) {
-        const edge = this.edges.find(undefined, (edge) => edge.start === vertex || edge.end === vertex);
-        return edge ? edge.value : null;
+    public findEdge(vertex: Vertex<T>) {
+        const found = this.edges.find(undefined, (edge) => edge.start === vertex || edge.end === vertex);
+        return found ? found.value : null;
     }
 
-    getKey(): string {
+    public getKey(): string {
         return this.key;
     }
 
-    getValue(): T {
+    public getValue(): T {
         return this.value;
     }
 
-    deleteAllEdges() {
+    public deleteAllEdges() {
         this.getEdges().forEach(edge => this.delete(edge));
         return this;
     }
 
-    toString(callback: (value: T) => string) {
+    public toString(callback: (value: T) => string) {
         return callback ? callback(this.value) : `${this.value}`;
     }
 }

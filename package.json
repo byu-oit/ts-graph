@@ -1,10 +1,12 @@
 {
-  "name": "ts-data-structures",
+  "name": "ts-graph",
   "version": "0.0.0",
-  "description": "Fundamental datastructures for TypeScript",
-  "main": "index.js",
+  "description": "Graph implementation in TypeScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/.bin/tslint -p tsconfig.json -t stylish --fix",
+    "build": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,9 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@types/uuid": "^3.4.5"
+    "@types/uuid": "^3.4.5",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.6.2"
   }
 }
