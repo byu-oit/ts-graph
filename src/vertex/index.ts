@@ -1,9 +1,9 @@
 import * as uuid from 'uuid/v4';
+import Edge from '../edge';
 import LinkedList from '../linked-list';
 import Node from '../node';
-import Edge from './edge';
 
-export default class Vertex<T> {
+export default class Index<T> {
     public edges: LinkedList<Edge<T>>;
     public key: string;
     public value: T;
@@ -58,12 +58,12 @@ export default class Vertex<T> {
         return !!edgeNode;
     }
 
-    public hasNeighbor(vertex: Vertex<T>) {
+    public hasNeighbor(vertex: Index<T>) {
         const vertexNode = this.edges.find(undefined, edge => edge.start === vertex || edge.end === vertex);
         return !!vertex;
     }
 
-    public findEdge(vertex: Vertex<T>) {
+    public findEdge(vertex: Index<T>) {
         const found = this.edges.find(undefined, (edge) => edge.start === vertex || edge.end === vertex);
         return found ? found.value : null;
     }

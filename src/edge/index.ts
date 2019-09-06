@@ -1,6 +1,6 @@
-import Vertex from './vertex';
+import Vertex from '../vertex';
 
-export default class Edge<T> {
+export default class Index<T> {
     public start: Vertex<T>;
     public end: Vertex<T>;
     public weight: number;
