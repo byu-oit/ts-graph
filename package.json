@@ -1,5 +1,5 @@
 {
-  "name": "ts-graph",
+  "name": "@byu-oit/ts-graph",
   "version": "1.0.0",
   "description": "Graph implementation in TypeScript",
   "main": "dist/index.js",
