@@ -1,0 +1,25 @@
+{
+  "name": "ts-data-structures",
+  "version": "0.0.0",
+  "description": "Fundamental datastructures for TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpencerTuft/ts-data-structures.git"
+  },
+  "author": "Spencer Tuft <spencer.tuft@byu.edu>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/SpencerTuft/ts-data-structures/issues"
+  },
+  "homepage": "https://github.com/SpencerTuft/ts-data-structures#readme",
+  "dependencies": {
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.5"
+  }
+}
